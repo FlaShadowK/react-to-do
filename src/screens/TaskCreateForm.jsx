@@ -17,7 +17,9 @@ const TaskCreateForm = () => {
                 ...tasks,
                 {
                     name,
-                    description
+                    description,
+                    status: 1,
+                    id: Date.now()
                 }
             ]
         ))
