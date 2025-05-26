@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {use, useEffect, useState} from "react";
 import {useNavigate} from "react-router";
 
 const TaskCreateForm = () => {
@@ -27,10 +27,21 @@ const TaskCreateForm = () => {
         navigate("/");
     }
 
+    useEffect(() => {
+        const handleKeyDown = (event) =>{
+            if (event.key === "Enter") {
+                handleCreate();
+            }
+        }
+
+        window.addEventListener("keydown", handleKeyDown);
+        return () => window.removeEventListener("keydown", handleKeyDown);
+    }, []);
+
 
     return (
-        <div className="row justify-center">
-            <div className="column w-30">
+        <div className="row justify-center" style={{marginTop: "10px"}}>
+            <div className="column w-30 gap-10">
                 <div>Create a task</div>
                 <input type="text"
                        onChange={(e) => setName(e.target.value)}
